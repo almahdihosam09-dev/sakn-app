@@ -1,0 +1,40 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Setup Project and Build
+        run: |
+          flutter create --org com.sakn.app app_temp
+          cp -r app_temp/* .
+          rm -rf app_temp
+          mkdir -p android/app
+          cp google-services.json android/app/
+          sed -i '/dependencies:/a \  firebase_core: ^2.24.2\n  cloud_firestore: ^4.14.0' pubspec.yaml
+          flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: sakn-app
+          path: build/app/outputs/flutter-apk/app-release.apk
