@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "482274097117",
+    "project_id": "hosam-86322",
+    "storage_bucket": "hosam-86322.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482274097117:android:4ee68d975f25d2ee75e834",
+        "android_client_info": {
+          "package_name": "com.sakn.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRDI3ritcnaw0XuR2wMFrvaT0LmxWDrWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
