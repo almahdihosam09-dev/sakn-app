@@ -25,12 +25,20 @@ jobs:
 
       - name: Setup Project and Build
         run: |
+          # حفظ كود التطبيق المخصص للسكن
+          cp lib/main.dart /tmp/main.dart
+          # إنشاء مشروع فلاتر
           flutter create --org com.sakn.app app_temp
           cp -r app_temp/* .
           rm -rf app_temp
+          # إعادة كود تطبيق السكن إلى مكانه
+          cp /tmp/main.dart lib/main.dart
+          # وضع ملف فايربيس داخل مجلد الأندرويد
           mkdir -p android/app
           cp google-services.json android/app/
+          # إضافة مكاتب فايربيس إلى المشروع
           sed -i '/dependencies:/a \  firebase_core: ^2.24.2\n  cloud_firestore: ^4.14.0' pubspec.yaml
+          # بناء ملف APK نهائي
           flutter build apk --release
 
       - name: Upload APK
